@@ -1,12 +1,11 @@
 import React from "react";
 import "./App.css";
+import ListHeader from "./components/ListHeader";
 
 function App() {
   return (
     <div id="app">
-      <h1 className="text-2xl font-bolder w-full text-center">
-        This is an todo application
-      </h1>
+      <ListHeader listName={"Holiday Tick List"} />
     </div>
   );
 }
