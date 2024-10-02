@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import ListHeader from "./components/ListHeader";
 import ListItem from "./components/ListItem";
+import AddNewItem from "./components/AddNewItem";
 
 function App() {
   const userEmail = "test@gmail.com";
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <div id="app">
+      <AddNewItem />
       <ListHeader listName={"Holiday Tick List"} />
       {sortedTasks?.map((todo) => (
         <ListItem key={todo.id} todo={todo} />
