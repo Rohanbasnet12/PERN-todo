@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import ListHeader from "./components/ListHeader";
+import ListItem from "./components/ListItem";
 
 function App() {
   const userEmail = "test@gmail.com";
@@ -32,14 +33,17 @@ function App() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  // Sort the data to show todos according to the time
+  const sortedTasks = todos?.sort((a, b) => {
+    return new Date(a.date) - new Date(b.date); // Return the result of the comparison
+  });
+
   return (
     <div id="app">
       <ListHeader listName={"Holiday Tick List"} />
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
-        ))}
-      </ul>
+      {sortedTasks?.map((todo) => (
+        <ListItem key={todo.id} todo={todo} />
+      ))}
     </div>
   );
 }
