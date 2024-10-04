@@ -23,15 +23,16 @@ const Modal = () => {
 
   return (
     <div className="overlay absolute top-0 left-0 flex items-center justify-center w-full h-full bg-slate-700/30">
-      <div className="modal">
+      <div className="modal w-[500px] bg-white p-12 rounded-3xl">
         <div className="form-title-container">
-          <h3>Let's {mode} Your Task</h3>
           <button id="close">
             <i className="fa-solid fa-xmark"></i>
           </button>
         </div>
         <form onSubmit={handleSubmit}>
-          <h1 className="text-center text-4xl font-bold py-4">Register</h1>
+          <h1 className="text-center text-4xl font-bold py-4">
+            Let's {mode} Your Task
+          </h1>
           <div className="username">
             <label htmlFor="username">Title</label>
             <div className="border-b-2 border-zinc-600">
@@ -43,6 +44,7 @@ const Modal = () => {
                 name="title"
                 onChange={handleChange}
                 onBlur={handleBlur}
+                className="w-full outline-none"
               />
             </div>
             {errors.title && touched.title && (
@@ -63,6 +65,7 @@ const Modal = () => {
                 name="progress"
                 onChange={handleChange}
                 onBlur={handleBlur}
+                className="w-full"
               />
             </div>
             {errors.progress && touched.progress && (
@@ -75,7 +78,7 @@ const Modal = () => {
             type="submit"
             className="w-full bg-slate-800 text-white font-medium text-xl rounded-md py-2 my-5"
           >
-            Register
+            Submit
           </button>
         </form>
       </div>
