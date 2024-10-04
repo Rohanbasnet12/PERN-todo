@@ -1,4 +1,5 @@
 import React from "react";
+import Modal from "./Modal";
 
 const ListHeader = ({ listName }) => {
   // Function to handle Sign Out
@@ -11,12 +12,13 @@ const ListHeader = ({ listName }) => {
       <h1>{listName}</h1>
       <div className="flex items-center gap-8" id="button-wrapper">
         <button
-          className="border rounded-md px-4 py-1 bg-transparent outline-none md:text-md lg:text-md sm:text-sm"
+          className="border rounded-md px-4 py-1 outline-none md:text-md lg:text-md sm:text-sm border-orange-500 bg-orange-300 text-orange-900 font-bold text-lg hover:bg-orange-200 hover:text-orange-600"
           onClick={signOut}
         >
           Sign Out
         </button>
       </div>
+      <Modal />
     </div>
   );
 };
