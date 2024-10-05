@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
+import AddNewItem from "./AddNewItem";
 
 const ListHeader = ({ listName }) => {
   const [showModel, setShowModel] = useState(false);
@@ -11,6 +12,7 @@ const ListHeader = ({ listName }) => {
 
   return (
     <div className="w-full flex justify-between border-b-2 py-5">
+      <AddNewItem setShowModel={setShowModel} />
       <h1>{listName}</h1>
       <div className="flex items-center gap-8" id="button-wrapper">
         <button

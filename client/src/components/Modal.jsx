@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { schema } from "../schema/schema";
 
-const Modal = ({ mode, setShowModal }) => {
+const Modal = ({ mode, setShowModel }) => {
   const editMode = mode === "edit" ? true : false;
 
   // UseState to Save the Changes
@@ -36,9 +36,7 @@ const Modal = ({ mode, setShowModal }) => {
           <button
             id="close"
             className="absolute top-[-35px] right-[-30px]"
-            onClick={() => {
-              setShowModal(false);
-            }}
+            onClick={() => setShowModel(false)}
           >
             <i className="fa-solid fa-xmark text-2xl hover:scale-110"></i>
           </button>
