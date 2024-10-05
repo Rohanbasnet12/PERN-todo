@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "./Modal";
 
 const ListHeader = ({ listName }) => {
+  const [showModel, setShowModel] = useState(false);
+
   // Function to handle Sign Out
   const signOut = () => {
     alert("Signed Out Button Pressed");
@@ -18,7 +20,7 @@ const ListHeader = ({ listName }) => {
           Sign Out
         </button>
       </div>
-      <Modal />
+      {showModel && <Modal mode={"Create"} setShowModel={setShowModel} />}
     </div>
   );
 };

@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { schema } from "../schema/schema";
-const Modal = () => {
-  const mode = "Add";
+
+const Modal = ({ mode, setShowModal }) => {
+  const editMode = mode === "edit" ? true : false;
+
+  // UseState to Save the Changes
+  const [data, setData] = useState({
+    user_email: "",
+    title: "",
+    progress: "",
+    date: editMode ? "" : new Date(),
+  });
 
   const onSubmit = async (values, actions) => {
     console.log(values);
@@ -15,7 +24,6 @@ const Modal = () => {
       initialValues: {
         title: "",
         progress: "",
-        password: "",
       },
       validationSchema: schema,
       onSubmit,
@@ -23,14 +31,20 @@ const Modal = () => {
 
   return (
     <div className="overlay absolute top-0 left-0 flex items-center justify-center w-full h-full bg-slate-700/30">
-      <div className="modal w-[500px] bg-white p-12 rounded-3xl">
-        <div className="form-title-container">
-          <button id="close">
-            <i className="fa-solid fa-xmark"></i>
+      <div className="modal lg:w-[500px] md:w-[800px] sm:container bg-white p-12 rounded-3xl">
+        <div className="form-title-container relative">
+          <button
+            id="close"
+            className="absolute top-[-35px] right-[-30px]"
+            onClick={() => {
+              setShowModal(false);
+            }}
+          >
+            <i className="fa-solid fa-xmark text-2xl hover:scale-110"></i>
           </button>
         </div>
         <form onSubmit={handleSubmit}>
-          <h1 className="text-center text-4xl font-bold py-4">
+          <h1 className="text-center text-4xl font-bold py-4 py-8">
             Let's {mode} Your Task
           </h1>
           <div className="username">
@@ -53,8 +67,8 @@ const Modal = () => {
               </div>
             )}
           </div>
-          <div className="email pt-3">
-            <label htmlFor="email">progress</label>
+          <div className="email pt-6">
+            <label htmlFor="email">Drag to select your current Progress</label>
             <div>
               <input
                 type="range"
