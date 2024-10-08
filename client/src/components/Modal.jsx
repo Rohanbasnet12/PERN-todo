@@ -2,31 +2,26 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { schema } from "../schema/schema";
 
-const Modal = ({ mode, setShowModel }) => {
-  const editMode = mode === "edit" ? true : false;
-
-  // UseState to Save the Changes
-  const [data, setData] = useState({
-    user_email: "",
-    title: "",
-    progress: "",
-    date: editMode ? "" : new Date(),
-  });
+const Modal = ({ mode, setShowModel, todo }) => {
+  const editMode = mode === "Edit";
 
   const onSubmit = async (values, actions) => {
     console.log(values);
     actions.resetForm();
+    setShowModel(false);
   };
 
   // Destructure formik helpers and state values
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        title: "",
-        progress: "",
+        title: editMode ? todo.title : "",
+        progress: editMode ? todo.progress : 50,
       },
+
       validationSchema: schema,
       onSubmit,
+      enableReinitialize: true,
     });
 
   return (

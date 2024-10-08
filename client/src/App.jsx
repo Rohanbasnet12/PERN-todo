@@ -5,7 +5,7 @@ import ListItem from "./components/ListItem";
 
 function App() {
   const userEmail = "test@gmail.com";
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([]); // State for todos
   const [loading, setLoading] = useState(true); // State for loading
   const [error, setError] = useState(null); // State for errors
 
