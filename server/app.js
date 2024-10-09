@@ -8,6 +8,8 @@ const port = process.env.PORT ?? 3000;
 const app = express();
 env.config(); // Setting up the environmental configuration
 app.use(cors()); // Using cors to establish connection between frontend and backend
+app.use(express.json());
+
 
 // Setting up the PostgreSQL database
 const db = new pg.Client({
@@ -43,6 +45,16 @@ app.get('/todos/:userEmail', async (req, res) => {
     }
 });
 
+// Add todo
+app.post('/todos', (req, res) => {
+    const { user_email, title, progress, date } = req.body
+    try {
+        db.query('INSERT INTO todos(user_email, title, progress, date) ($1, $2, $3, $4)'
+            , [user_email, title, progress, date])
+    } catch (err) {
+        console.error(err);
+    }
+})
 
 // Listening to the App on Port
 app.listen(port, () => {

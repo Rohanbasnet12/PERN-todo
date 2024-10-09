@@ -5,8 +5,24 @@ import { schema } from "../schema/schema";
 const Modal = ({ mode, setShowModel, todo }) => {
   const editMode = mode === "Edit";
 
+  const postData = async (values) => {
+    try {
+      await fetch("http://localhost:3000/todos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: values.title,
+          progress: values.progress,
+        }),
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const onSubmit = async (values, actions) => {
-    console.log(values);
+    console.log(values); // Log form values to ensure they're correct
+    await postData(values); // Pass Formik values, not the entire todo object
     actions.resetForm();
     setShowModel(false);
   };
@@ -41,7 +57,7 @@ const Modal = ({ mode, setShowModel, todo }) => {
             Let's {mode} Your Task
           </h1>
           <div className="username">
-            <label htmlFor="username">Title</label>
+            <label htmlFor="username">Your Task</label>
             <div className="border-b-2 border-zinc-600">
               <input
                 type="text"
@@ -72,7 +88,7 @@ const Modal = ({ mode, setShowModel, todo }) => {
                 name="progress"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="w-full"
+                className="w-full py-4"
               />
             </div>
             {errors.progress && touched.progress && (
@@ -84,6 +100,7 @@ const Modal = ({ mode, setShowModel, todo }) => {
           <button
             type="submit"
             className="w-full bg-slate-800 text-white font-medium text-xl rounded-md py-2 my-5"
+            onClick={editMode ? "" : postData}
           >
             Submit
           </button>
